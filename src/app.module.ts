@@ -1,12 +1,15 @@
 import { Cliente } from './Clientes/entities/cliente.entity';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+<<<<<<< HEAD
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Usuario } from './usuario/entities/usuario.entity'; 
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 
+import { CategoriaEntity } from './categoria/entities/categoria.entity';
+import { CategoriaModule } from './categoria/categoria.module';
 import { ConfigModule } from '@nestjs/config';
 import { ClienteModule } from './Clientes/cliente.module';
 
@@ -20,18 +23,22 @@ import { ClienteModule } from './Clientes/cliente.module';
       host: 'localhost',
       port: 3306,
 
+
       username: 'root',
       password: 'root', 
       database: 'db_sistemacrm',
-      entities: [Usuario,Cliente],
+      entities: [Usuario,Cliente,CategoriaEntity],
       synchronize: true, 
     }),
     UsuarioModule,
     AuthModule,
        ClienteModule,
+       
+    CategoriaModule
   ],
   controllers: [AppController],
   providers: [AppService],
+
 })
 
    

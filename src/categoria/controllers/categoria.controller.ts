@@ -8,7 +8,7 @@ export class CategoriaController {
         private readonly categoriaService: CategoriaService
     ) {}
 
-    @Get('/todos')
+    @Get()
     @HttpCode(HttpStatus.OK)
     buscarTodos(): Promise<CategoriaEntity[]>{
         return this.categoriaService.buscarTodas();
@@ -38,7 +38,7 @@ export class CategoriaController {
         return this.categoriaService.atualizar(categoria);
     }
 
-    @Delete('/deletar/:id')
+    @Delete('/:id')
     @HttpCode(HttpStatus.NO_CONTENT)
     async deletar(@Param('id', ParseIntPipe) id: number): Promise<void>{
         return this.categoriaService.deletar(id);

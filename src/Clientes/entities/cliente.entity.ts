@@ -1,6 +1,7 @@
 import { Transform } from "class-transformer";
 import { IsEmail, IsNotEmpty, Matches, MinLength, minLength } from "class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { OportunidadeEntity } from "../../oportunidade/entities/oportunidade.entity";
 
 
 @Entity({ name: "tb_clientes" })
@@ -28,6 +29,6 @@ export class Cliente {
 
     
     
-    // @OneToMany(() => Produto, (produto) => produto.categoria)
-    // produto: Produto[];
+    @OneToMany(() => OportunidadeEntity ,(produto) => produto.cliente)
+     produto: OportunidadeEntity[];
 }

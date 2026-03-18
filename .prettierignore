@@ -1,0 +1,12 @@
+# ignore artifacts
+dist
+node_modules
+coverage
+package-lock.json
+
+# ignore other files
+*.md
+nest-cli.json
+tsconfig.build.json
+tsconfig.json
+eslint.config.mjs

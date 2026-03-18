@@ -1,46 +1,61 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
-import { CategoriaService } from "../services/categoria.service";
-import { CategoriaEntity } from "../entities/categoria.entity";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { CategoriaService } from '../services/categoria.service';
+import { CategoriaEntity } from '../entities/categoria.entity';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 
+@ApiTags('Categoria')
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 @Controller('/categorias')
 export class CategoriaController {
-    constructor(
-        private readonly categoriaService: CategoriaService
-    ) {}
+  constructor(private readonly categoriaService: CategoriaService) {}
 
-    @Get()
-    @HttpCode(HttpStatus.OK)
-    buscarTodos(): Promise<CategoriaEntity[]>{
-        return this.categoriaService.buscarTodas();
-    }
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  buscarTodos(): Promise<CategoriaEntity[]> {
+    return this.categoriaService.buscarTodas();
+  }
 
-    @Get('/nome/:nome')
-    @HttpCode(HttpStatus.OK)
-    buscarPorNome(@Param('nome') nome: string): Promise<CategoriaEntity[]>{
-        return this.categoriaService.buscarPorNome(nome);
-    }
+  @Get('/nome/:nome')
+  @HttpCode(HttpStatus.OK)
+  buscarPorNome(@Param('nome') nome: string): Promise<CategoriaEntity[]> {
+    return this.categoriaService.buscarPorNome(nome);
+  }
 
-    @Get('/:id')
-    @HttpCode(HttpStatus.OK)
-    buscarPorId(@Param('id', ParseIntPipe) id: number): Promise<CategoriaEntity>{
-        return this.categoriaService.buscarPorId(id);
-    }
+  @Get('/:id')
+  @HttpCode(HttpStatus.OK)
+  buscarPorId(@Param('id', ParseIntPipe) id: number): Promise<CategoriaEntity> {
+    return this.categoriaService.buscarPorId(id);
+  }
 
-    @Post('/cadastrar')
-    @HttpCode(HttpStatus.CREATED)
-    cadastrar(@Body() categoria: CategoriaEntity): Promise<CategoriaEntity>{
-        return this.categoriaService.cadastrar(categoria);
-    }
+  @Post('/cadastrar')
+  @HttpCode(HttpStatus.CREATED)
+  cadastrar(@Body() categoria: CategoriaEntity): Promise<CategoriaEntity> {
+    return this.categoriaService.cadastrar(categoria);
+  }
 
-    @Put('/atualizar')
-    @HttpCode(HttpStatus.OK)
-    atualizar(@Body() categoria: CategoriaEntity): Promise<CategoriaEntity>{
-        return this.categoriaService.atualizar(categoria);
-    }
+  @Put('/atualizar')
+  @HttpCode(HttpStatus.OK)
+  atualizar(@Body() categoria: CategoriaEntity): Promise<CategoriaEntity> {
+    return this.categoriaService.atualizar(categoria);
+  }
 
-    @Delete('/:id')
-    @HttpCode(HttpStatus.NO_CONTENT)
-    async deletar(@Param('id', ParseIntPipe) id: number): Promise<void>{
-        return this.categoriaService.deletar(id);
-    }
+  @Delete('/:id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deletar(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.categoriaService.deletar(id);
+  }
 }

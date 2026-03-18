@@ -1,0 +1,57 @@
+
+> sistema-de-crm@0.0.1 lint
+> eslint "{src,apps,libs,test}/**/*.ts" --fix
+
+
+C:\Users\José\Desktop\Sistema-De-CRM\Sistema-De-CRM\src\Clientes\entities\cliente.entity.ts
+   7:3   error  'minLength' is defined but never used                @typescript-eslint/no-unused-vars
+  31:29  error  Unsafe return of a value of type `any`               @typescript-eslint/no-unsafe-return
+  31:29  error  Unsafe call of an `any` typed value                  @typescript-eslint/no-unsafe-call
+  31:35  error  Unsafe member access .toLowerCase on an `any` value  @typescript-eslint/no-unsafe-member-access
+
+C:\Users\José\Desktop\Sistema-De-CRM\Sistema-De-CRM\src\auth\auth.module.ts
+  14:5   error  Unsafe call of a type that could not be resolved                  @typescript-eslint/no-unsafe-call
+  14:15  error  Unsafe member access .register on a type that cannot be resolved  @typescript-eslint/no-unsafe-member-access
+
+C:\Users\José\Desktop\Sistema-De-CRM\Sistema-De-CRM\src\auth\controllers\auth.controller.ts
+  7:3  error  'UseGuards' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\José\Desktop\Sistema-De-CRM\Sistema-De-CRM\src\auth\guards\jwt-auth.guard.ts
+  5:35  error  Unsafe call of a type that could not be resolved  @typescript-eslint/no-unsafe-call
+
+C:\Users\José\Desktop\Sistema-De-CRM\Sistema-De-CRM\src\auth\services\auth.service.ts
+  14:66  warning  Unsafe argument of type `any` assigned to a parameter of type `string`                            @typescript-eslint/no-unsafe-argument
+  14:71  error    Unsafe member access .usuario on an `any` value                                                   @typescript-eslint/no-unsafe-member-access
+  20:48  warning  Unsafe argument of type `any` assigned to a parameter of type `string | Buffer<ArrayBufferLike>`  @typescript-eslint/no-unsafe-argument
+  20:53  error    Unsafe member access .senha on an `any` value                                                     @typescript-eslint/no-unsafe-member-access
+  25:9   error    Unsafe assignment of an error typed value                                                         @typescript-eslint/no-unsafe-assignment
+  25:23  error    Unsafe call of a type that could not be resolved                                                  @typescript-eslint/no-unsafe-call
+  25:39  error    Unsafe member access .sign on a type that cannot be resolved                                      @typescript-eslint/no-unsafe-member-access
+
+C:\Users\José\Desktop\Sistema-De-CRM\Sistema-De-CRM\src\auth\strategy\jwt.strategy.ts
+   7:34  error  Unsafe call of a type that could not be resolved                                     @typescript-eslint/no-unsafe-call
+   9:5   error  Unsafe call of a type that could not be resolved                                     @typescript-eslint/no-unsafe-call
+  10:7   error  Unsafe assignment of an error typed value                                            @typescript-eslint/no-unsafe-assignment
+  10:23  error  Unsafe call of a type that could not be resolved                                     @typescript-eslint/no-unsafe-call
+  10:34  error  Unsafe member access .fromAuthHeaderAsBearerToken on a type that cannot be resolved  @typescript-eslint/no-unsafe-member-access
+  16:3   error  Async method 'validate' has no 'await' expression                                    @typescript-eslint/require-await
+  17:14  error  Unsafe assignment of an `any` value                                                  @typescript-eslint/no-unsafe-assignment
+  17:30  error  Unsafe member access .sub on an `any` value                                          @typescript-eslint/no-unsafe-member-access
+  17:35  error  Unsafe assignment of an `any` value                                                  @typescript-eslint/no-unsafe-assignment
+  17:53  error  Unsafe member access .username on an `any` value                                     @typescript-eslint/no-unsafe-member-access
+
+C:\Users\José\Desktop\Sistema-De-CRM\Sistema-De-CRM\src\categoria\entities\categoria.entity.ts
+  13:48  error  Unsafe return of a value of type `any`        @typescript-eslint/no-unsafe-return
+  13:48  error  Unsafe call of an `any` typed value           @typescript-eslint/no-unsafe-call
+  13:55  error  Unsafe member access .trim on an `any` value  @typescript-eslint/no-unsafe-member-access
+
+C:\Users\José\Desktop\Sistema-De-CRM\Sistema-De-CRM\src\main.ts
+  31:1  warning  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+
+C:\Users\José\Desktop\Sistema-De-CRM\Sistema-De-CRM\src\oportunidade\entities\oportunidade.entity.ts
+  19:48  error  Unsafe return of a value of type `any`        @typescript-eslint/no-unsafe-return
+  19:48  error  Unsafe call of an `any` typed value           @typescript-eslint/no-unsafe-call
+  19:55  error  Unsafe member access .trim on an `any` value  @typescript-eslint/no-unsafe-member-access
+
+✖ 32 problems (29 errors, 3 warnings)
+

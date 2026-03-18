@@ -1,3 +1,3 @@
 export const jwtConstants = {
-    secret: 'CHAVE_SEC_GREENTECH_2026', 
+  secret: 'CHAVE_SEC_GREENTECH_2026',
 };

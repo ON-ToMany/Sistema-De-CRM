@@ -1,60 +1,74 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { StatusOportunidade } from "./statusOportunidade.enum";
-import { IsNotEmpty, IsNumber, Length, Min, Max } from "class-validator";
-import { Transform, TransformFnParams } from "class-transformer";
-import { Cliente } from "../../Clientes/entities/cliente.entity";
-import { CategoriaEntity } from "../../categoria/entities/categoria.entity";
-import { Usuario } from "../../usuario/entities/usuario.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { StatusOportunidade } from './statusOportunidade.enum';
+import { IsNotEmpty, IsNumber, Length, Min, Max } from 'class-validator';
+import { Transform, TransformFnParams } from 'class-transformer';
+import { Cliente } from '../../Clientes/entities/cliente.entity';
+import { CategoriaEntity } from '../../categoria/entities/categoria.entity';
+import { Usuario } from '../../usuario/entities/usuario.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
-@Entity({name: 'tb_oportunidade'})
+@Entity({ name: 'tb_oportunidade' })
 export class OportunidadeEntity {
+  @PrimaryGeneratedColumn()
+  @ApiProperty()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @ManyToOne(() => Cliente, (cliente) => cliente.produto, {
+    onDelete: 'CASCADE',
+  })
+  @ApiProperty({ type: () => Cliente })
+  cliente: Cliente;
 
+  @Transform(({ value }: TransformFnParams) => value?.trim())
+  @IsNotEmpty({ message: 'É obrigatório informar o equipamento!' })
+  @Length(5, 255, {
+    message: 'O equipamento deve conter entre 5 e 255 caracteres!',
+  })
+  @Column({ type: 'varchar', length: 255, nullable: false })
+  @ApiProperty()
+  equipamento: string;
 
-    @ManyToOne(() => Cliente, (cliente) => cliente.produto, { 
-         onDelete: "CASCADE" 
-    })
-    cliente: Cliente;
+  //atributos para calculo de co2 baseado no peso e estado de conservação do equipamento
+  @IsNumber({ maxDecimalPlaces: 2 })
+  @Min(0.01)
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
+  @ApiProperty()
+  peso: number;
 
-    @Transform(({value}: TransformFnParams) => value?.trim())
-    @IsNotEmpty({ message: "É obrigatório informar o equipamento!" })
-    @Length(5, 255, { message: "O equipamento deve conter entre 5 e 255 caracteres!" })
-    @Column({type: 'varchar', length: 255, nullable: false})
-    equipamento: string;
+  @IsNumber()
+  @Min(1, {
+    message: 'O estado de conservação deve ser um número entre 1 e 10',
+  })
+  @Max(10, {
+    message: 'O estado de conservação deve ser um número entre 1 e 10',
+  })
+  @Column({ type: 'int', nullable: false })
+  @ApiProperty()
+  valorConservacao: number;
 
-    //atributos para calculo de co2 baseado no peso e estado de conservação do equipamento
-    @IsNumber({maxDecimalPlaces: 2})
-    @Min(0.01)
-    @Column({type: 'decimal', precision: 10, scale: 2, nullable: false})
-    peso: number;
+  // não é armazenado no banco, serve somente para o retornar o estado (ótimo, bom, ruim)
+  estadoConservacao: string;
 
-    @IsNumber()
-    @Min(1, { message: 'O estado de conservação deve ser um número entre 1 e 10' })
-    @Max(10, { message: 'O estado de conservação deve ser um número entre 1 e 10' })
-    @Column({type: 'int', nullable: false})
-    valorConservacao: number;
+  // não é armazenado no banco, serve somente para o retornar o valor economzado de co2
+  co2Economizado: number;
 
-    // não é armazenado no banco, serve somente para o retornar o estado (ótimo, bom, ruim)
-    estadoConservacao: string;
+  @ManyToOne(() => CategoriaEntity, (categoria) => categoria.produtos, {
+    onDelete: 'CASCADE',
+  })
+  @ApiProperty({ type: () => CategoriaEntity })
+  categoria: CategoriaEntity;
 
-    // não é armazenado no banco, serve somente para o retornar o valor economzado de co2
-    co2Economizado: number;
+  @Column({
+    type: 'enum',
+    enum: StatusOportunidade,
+    default: StatusOportunidade.PENDENTE,
+  })
+  @ApiProperty()
+  status: StatusOportunidade;
 
-  
-    @ManyToOne(() => CategoriaEntity, (categoria) => categoria.produtos, { 
-        onDelete: "CASCADE" 
-     })
-    categoria: CategoriaEntity;
-
-    @Column({ type: 'enum', enum: StatusOportunidade, default: StatusOportunidade.PENDENTE})
-    status: StatusOportunidade;
-
-
-
-    @ManyToOne(() => Usuario, (usuario) => usuario, { 
-         onDelete: "CASCADE" 
-    })
-    usuario: Usuario;
+  @ManyToOne(() => Usuario, (usuario) => usuario.produto, {
+    onDelete: 'CASCADE',
+  })
+  @ApiProperty({ type: () => Usuario })
+  usuario: Usuario;
 }

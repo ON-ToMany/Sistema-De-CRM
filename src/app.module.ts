@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Usuario } from './usuario/entities/usuario.entity'; 
+import { Usuario } from './usuario/entities/usuario.entity';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 
@@ -24,24 +24,18 @@ import { OportunidadeModule } from './oportunidade/oportunidade.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root', 
+      password: 'root',
       database: 'db_sistemacrm',
-      entities: [Usuario,Cliente,CategoriaEntity,OportunidadeEntity],
-      synchronize: true, 
+      entities: [Usuario, Cliente, CategoriaEntity, OportunidadeEntity],
+      synchronize: true,
     }),
     UsuarioModule,
     AuthModule,
-       ClienteModule,
-        OportunidadeModule,
-    CategoriaModule
+    ClienteModule,
+    OportunidadeModule,
+    CategoriaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
-
-
-
 })
-
-   
-
 export class AppModule {}

@@ -26,6 +26,6 @@ export class Usuario {
     tipo: string;
 
     //@OneToMany(() => Produto, (produto) => produto.usuario)
-    //produto: Produto[]; 
+    //produto: Produto[]
     
 }

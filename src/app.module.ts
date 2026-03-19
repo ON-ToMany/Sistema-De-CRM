@@ -17,11 +17,11 @@ import { DevService } from './data/services/dev.service';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-ConfigModule.forRoot(),
-TypeOrmModule.forRootAsync({
-	useClass: ProdService,
-    imports: [ConfigModule],
-}),
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      useClass: ProdService,
+      imports: [ConfigModule],
+    }),
     UsuarioModule,
     AuthModule,
     ClienteModule,

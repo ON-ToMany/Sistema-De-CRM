@@ -11,7 +11,7 @@ export class AuthService {
   ) {}
 
   async login(user: any) {
-    const buscaUsuario = await this.usuarioService.findByUsuario(user.usuario);
+    const buscaUsuario = await this.usuarioService.findByUsuario(user.usuario || user.email);
 
     if (!buscaUsuario) {
       throw new HttpException('Usuário não encontrado!', HttpStatus.NOT_FOUND);

@@ -5,16 +5,18 @@ import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
 @Injectable()
 export class ProdService implements TypeOrmOptionsFactory {
 
+  constructor(private configService: ConfigService) {}
+
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
       type: 'postgres',
-      url: process.env.DATABASE_URL,
+      url: this.configService.get('DATABASE_URL'),
       logging: false,
       dropSchema: false,
       ssl: {
         rejectUnauthorized: false,
       },
-      synchronize: true,
+      synchronize: false,
       autoLoadEntities: true,
     };
   }

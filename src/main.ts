@@ -7,12 +7,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Blog Pessoal')
-    .setDescription('Projeto Blog Pessoal')
+    .setTitle('Sistema de CRM')
+    .setDescription('Sistema de CRM')
     .setContact(
-      'Generation Brasil',
-      'http://www.generationbrasil.online',
-      'generation@email.com',
+      'One To Many',
+      'https://github.com/0NEtoMany',
+      'one1tomany@gmail.com',
     )
     .setVersion('1.0')
     .addBearerAuth()

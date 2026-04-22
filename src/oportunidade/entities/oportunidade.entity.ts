@@ -3,9 +3,9 @@ import { StatusOportunidade } from './statusOportunidade.enum';
 import { IsNotEmpty, IsNumber, Length, Min, Max } from 'class-validator';
 import { Transform, TransformFnParams } from 'class-transformer';
 import { Cliente } from '../../cliente/entities/cliente.entity';
-import { CategoriaEntity } from '../../categoria/entities/categoria.entity';
 import { Usuario } from '../../usuario/entities/usuario.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { CategoriasOportunidade } from './categoriasOportunidade.enum';
 
 @Entity({ name: 'tb_oportunidade' })
 export class OportunidadeEntity {
@@ -13,11 +13,6 @@ export class OportunidadeEntity {
   @ApiProperty()
   id: number;
 
-  @ManyToOne(() => Cliente, (cliente) => cliente.oportunidades, {
-    onDelete: 'CASCADE',
-  })
-  @ApiProperty({ type: () => Cliente })
-  cliente: Cliente;
 
   @Transform(({ value }: TransformFnParams) => value?.trim())
   @IsNotEmpty({ message: 'É obrigatório informar o equipamento!' })
@@ -52,12 +47,6 @@ export class OportunidadeEntity {
   // não é armazenado no banco, serve somente para o retornar o valor economzado de co2
   co2Economizado: number;
 
-  @ManyToOne(() => CategoriaEntity, (categoria) => categoria.oportunidades, {
-    onDelete: 'CASCADE',
-  })
-  @ApiProperty({ type: () => CategoriaEntity })
-  categoria: CategoriaEntity;
-
   @Column({
     type: 'enum',
     enum: StatusOportunidade,
@@ -66,10 +55,23 @@ export class OportunidadeEntity {
   @ApiProperty()
   status: StatusOportunidade;
 
+  @Column({
+    type: 'enum',
+    enum: CategoriasOportunidade,
+    default: CategoriasOportunidade.INDEFINIDO,
+  })
+  @ApiProperty()
+  categoria: CategoriasOportunidade;
+
+  @ManyToOne(() => Cliente, (cliente) => cliente.oportunidades, {
+    onDelete: 'CASCADE',
+  })
+  @ApiProperty({ type: () => Cliente })
+  cliente: Cliente;
+
   @ManyToOne(() => Usuario, (usuario) => usuario.oportunidades, {
     onDelete: 'CASCADE',
   })
-  
   @ApiProperty({ type: () => Usuario })
   usuario: Usuario;
 }

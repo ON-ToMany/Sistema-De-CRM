@@ -41,7 +41,6 @@ export class OportunidadeService {
     const oportunidades = await this.oportunidadeRepository.find({
       relations: {
           cliente: true,
-          categoria: true,
           usuario: true
       }
     });
@@ -58,7 +57,6 @@ export class OportunidadeService {
       where: { id },
       relations: {
           cliente: true,
-          categoria: true,
           usuario: true
       }
     });
@@ -81,7 +79,6 @@ export class OportunidadeService {
       },
       relations: {
           cliente: true,
-          categoria: true,
           usuario: true
       }
     });

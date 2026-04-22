@@ -4,7 +4,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
-import { CategoriaModule } from './categoria/categoria.module';
 import { ConfigModule } from '@nestjs/config';
 import { ClienteModule } from './cliente/cliente.module';
 import { OportunidadeModule } from './oportunidade/oportunidade.module';
@@ -22,7 +21,6 @@ import { DevService } from './data/services/dev.service';
     AuthModule,
     ClienteModule,
     OportunidadeModule,
-    CategoriaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { Usuario } from '../../usuario/entities/usuario.entity';
-import { CategoriaEntity } from '../../categoria/entities/categoria.entity';
 import { OportunidadeEntity } from '../../oportunidade/entities/oportunidade.entity';
 import { Cliente } from '../../cliente/entities/cliente.entity';
 
@@ -15,7 +14,7 @@ export class DevService implements TypeOrmOptionsFactory {
       username: 'root',
       password: 'root',
       database: 'db_sistemacrm',
-      entities: [CategoriaEntity, Cliente, OportunidadeEntity, Usuario],
+      entities: [Cliente, OportunidadeEntity, Usuario],
       synchronize: true,
     };
   }

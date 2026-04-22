@@ -2,7 +2,6 @@ import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { OportunidadeEntity } from '../../oportunidade/entities/oportunidade.entity';
 import { ApiProperty } from '@nestjs/swagger';
-//import { Produto } from "../../produto/entities/produto.entity";
 
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
@@ -32,6 +31,6 @@ export class Usuario {
   tipo: string;
 
   @ApiProperty({ type: () => [OportunidadeEntity] })
-  @OneToMany(() => OportunidadeEntity, (produto) => produto.usuario)
-  produto: OportunidadeEntity[];
+  @OneToMany(() => OportunidadeEntity, (oportunidades) => oportunidades.usuario)
+  oportunidades: OportunidadeEntity[];
 }

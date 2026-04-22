@@ -18,7 +18,7 @@ export class ClienteService {
     const cliente = await this.clienteRepository.findOne({
       where: { id },
       relations:{
-          produto:true,
+          oportunidades:true,
       }
     });
 
@@ -34,7 +34,7 @@ export class ClienteService {
         nome: ILike(`%${nome}%`),
       },
       relations:{
-          produto:true,
+          oportunidades:true,
       }
     });
   }
@@ -45,17 +45,18 @@ export class ClienteService {
         cpf: ILike(`%${cpf}%`),
       },
       relations:{
-          produto:true,
+          oportunidades:true,
       }
     });
   }
+
   async findByemail(email: string): Promise<Cliente[]> {
     return await this.clienteRepository.find({
       where: {
         email: ILike(`%${email}%`),
       },
       relations:{
-          produto:true,
+          oportunidades:true,
       }
     });
   }

@@ -22,7 +22,7 @@ export class UsuarioService {
   async findAll(): Promise<Usuario[]> {
     return await this.usuarioRepository.find({
       relations: {
-        produto: true  
+        oportunidades: true  
       },
     });
   }

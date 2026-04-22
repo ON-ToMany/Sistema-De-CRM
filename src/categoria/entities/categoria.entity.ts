@@ -17,6 +17,6 @@ export class CategoriaEntity {
   nome: string;
 
   @ApiProperty({ type: () => [OportunidadeEntity] })
-  @OneToMany(() => OportunidadeEntity, (oportunidade) => oportunidade.categoria)
-  produtos: OportunidadeEntity[];
+  @OneToMany(() => OportunidadeEntity, (oportunidades) => oportunidades.categoria)
+  oportunidades: OportunidadeEntity[];
 }

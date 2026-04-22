@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { StatusOportunidade } from './statusOportunidade.enum';
 import { IsNotEmpty, IsNumber, Length, Min, Max } from 'class-validator';
 import { Transform, TransformFnParams } from 'class-transformer';
-import { Cliente } from '../../Clientes/entities/cliente.entity';
+import { Cliente } from '../../cliente/entities/cliente.entity';
 import { CategoriaEntity } from '../../categoria/entities/categoria.entity';
 import { Usuario } from '../../usuario/entities/usuario.entity';
 import { ApiProperty } from '@nestjs/swagger';
@@ -13,7 +13,7 @@ export class OportunidadeEntity {
   @ApiProperty()
   id: number;
 
-  @ManyToOne(() => Cliente, (cliente) => cliente.produto, {
+  @ManyToOne(() => Cliente, (cliente) => cliente.oportunidades, {
     onDelete: 'CASCADE',
   })
   @ApiProperty({ type: () => Cliente })
@@ -52,7 +52,7 @@ export class OportunidadeEntity {
   // não é armazenado no banco, serve somente para o retornar o valor economzado de co2
   co2Economizado: number;
 
-  @ManyToOne(() => CategoriaEntity, (categoria) => categoria.produtos, {
+  @ManyToOne(() => CategoriaEntity, (categoria) => categoria.oportunidades, {
     onDelete: 'CASCADE',
   })
   @ApiProperty({ type: () => CategoriaEntity })
@@ -66,9 +66,10 @@ export class OportunidadeEntity {
   @ApiProperty()
   status: StatusOportunidade;
 
-  @ManyToOne(() => Usuario, (usuario) => usuario.produto, {
+  @ManyToOne(() => Usuario, (usuario) => usuario.oportunidades, {
     onDelete: 'CASCADE',
   })
+  
   @ApiProperty({ type: () => Usuario })
   usuario: Usuario;
 }

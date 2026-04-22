@@ -14,7 +14,7 @@ export class CategoriaService {
   async buscarTodas(): Promise<CategoriaEntity[]> {
     return this.categoriaRepository.find({
       relations: {
-        produtos: true,
+        oportunidades: true,
       },
     });
   }
@@ -25,7 +25,7 @@ export class CategoriaService {
         id,
       },
       relations: {
-        produtos: true,
+        oportunidades: true,
       },
     });
 
@@ -44,7 +44,7 @@ export class CategoriaService {
         nome: ILike(`%${nome}%`),
       },
       relations: {
-        produtos: true,
+        oportunidades: true,
       },
     });
   }

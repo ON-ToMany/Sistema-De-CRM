@@ -6,7 +6,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ConfigModule } from '@nestjs/config';
-import { ClienteModule } from './Clientes/cliente.module';
+import { ClienteModule } from './cliente/cliente.module';
 import { OportunidadeModule } from './oportunidade/oportunidade.module';
 import { ProdService } from './data/services/prod.service';
 import { DevService } from './data/services/dev.service';

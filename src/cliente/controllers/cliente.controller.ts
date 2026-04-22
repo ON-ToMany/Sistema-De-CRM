@@ -40,11 +40,13 @@ export class ClienteController {
   findBynome(@Param('nome') nome: string): Promise<Cliente[]> {
     return this.clienteService.findByNome(nome);
   }
+
   @Get('/cpf/:cpf')
   @HttpCode(HttpStatus.OK)
   findByCpf(@Param('nome') cpf: string): Promise<Cliente[]> {
     return this.clienteService.findByCpf(cpf);
   }
+  
   @Get('/email/:email')
   @HttpCode(HttpStatus.OK)
   findByEmail(@Param('nome') email: string): Promise<Cliente[]> {

@@ -4,7 +4,6 @@ import {
   IsNotEmpty,
   Matches,
   MinLength,
-  minLength,
 } from 'class-validator';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { OportunidadeEntity } from '../../oportunidade/entities/oportunidade.entity';
@@ -34,7 +33,7 @@ export class Cliente {
   @ApiProperty()
   email: string;
 
-  @OneToMany(() => OportunidadeEntity, (produto) => produto.cliente)
+  @OneToMany(() => OportunidadeEntity, (oportunidades) => oportunidades.cliente)
   @ApiProperty({ type: () => [OportunidadeEntity] })
-  produto: OportunidadeEntity[];
+  oportunidades: OportunidadeEntity[];
 }

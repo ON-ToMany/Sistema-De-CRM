@@ -137,13 +137,9 @@ export class OportunidadeService {
   }
 
   // Métodos de cadastro, atualização e exclusão
-  async cadastrar(
-    oportunidade: OportunidadeEntity,
-  ): Promise<OportunidadeEntity> {
-    const novaOportunidade =
-      await this.oportunidadeRepository.save(oportunidade);
-    this.processarOportunidade(novaOportunidade);
-    return novaOportunidade;
+  async cadastrar(oportunidade: OportunidadeEntity): Promise<OportunidadeEntity> {
+    const novaOportunidade = await this.oportunidadeRepository.save(oportunidade);
+    return this.buscarPorId(novaOportunidade.id);
   }
 
   async atualizar(

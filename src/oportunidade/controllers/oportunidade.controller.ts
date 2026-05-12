@@ -10,6 +10,7 @@ import {
   Patch,
   Post,
   Put,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { OportunidadeService } from '../services/oportunidade.service';
@@ -26,8 +27,9 @@ export class OportunidadeController {
 
   @Get('/todas')
   @HttpCode(HttpStatus.OK)
-  buscarTodas(): Promise<OportunidadeEntity[]> {
-    return this.oportunidadeService.buscarTodas();
+  buscarTodas(@Req() req: any): Promise<OportunidadeEntity[]> {
+    const usuarioId = req.user.id;
+    return this.oportunidadeService.buscarTodas(usuarioId);
   }
 
   // método de busca especifico
@@ -35,8 +37,10 @@ export class OportunidadeController {
   @HttpCode(HttpStatus.OK)
   buscarPorEquipamento(
     @Param('equipamento') equipamento: string,
+    @Req() req: any
   ): Promise<OportunidadeEntity[]> {
-    return this.oportunidadeService.buscarPorEquipamento(equipamento);
+    const usuarioId = req.user.id;
+    return this.oportunidadeService.buscarPorEquipamento(equipamento, usuarioId);
   }
 
   @Get('/:id')
@@ -50,8 +54,9 @@ export class OportunidadeController {
   @Post('/cadastrar')
   @HttpCode(HttpStatus.CREATED)
   cadastrar(
-    @Body() oportunidade: OportunidadeEntity,
+    @Body() oportunidade: OportunidadeEntity, @Req() req: any
   ): Promise<OportunidadeEntity> {
+    oportunidade.usuario = req.user;
     return this.oportunidadeService.cadastrar(oportunidade);
   }
 

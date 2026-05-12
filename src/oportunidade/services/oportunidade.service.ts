@@ -37,8 +37,11 @@ export class OportunidadeService {
   }
 
   //métodos de busca
-  async buscarTodas(): Promise<OportunidadeEntity[]> {
+  async buscarTodas(usuarioId: number): Promise<OportunidadeEntity[]> {
     const oportunidades = await this.oportunidadeRepository.find({
+      where: {
+        usuario: { id: usuarioId }, // FILTRO: Apenas o que pertence ao usuário logado
+      },
       relations: {
           cliente: true,
           usuario: true
@@ -72,9 +75,10 @@ export class OportunidadeService {
     return oportunidade;
   }
 
-  async buscarPorEquipamento(nome: string): Promise<OportunidadeEntity[]> {
+  async buscarPorEquipamento(nome: string, usuarioId: number): Promise<OportunidadeEntity[]> {
     const buscarOportunidade = await this.oportunidadeRepository.find({
       where: {
+        usuario: { id: usuarioId }, 
         equipamento: ILike(`%${nome}%`),
       },
       relations: {
@@ -139,7 +143,7 @@ export class OportunidadeService {
   // Métodos de cadastro, atualização e exclusão
   async cadastrar(oportunidade: OportunidadeEntity): Promise<OportunidadeEntity> {
     const novaOportunidade = await this.oportunidadeRepository.save(oportunidade);
-    return this.buscarPorId(novaOportunidade.id);
+    return await this.buscarPorId(novaOportunidade.id);
   }
 
   async atualizar(

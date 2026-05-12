@@ -8,16 +8,18 @@ import {
 } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+import { LocalAuthGuard } from '../guards/local.auth.guard';
+import { UsuarioLogin } from '../entities/usuarioLogin.entity';
 
 @ApiTags('Usuario')
 @Controller('/auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @UseGuards(LocalAuthGuard)
   @Post('/login')
   @HttpCode(HttpStatus.OK)
-  async login(@Body() user: any) {
+  async login(@Body() user: UsuarioLogin) {
     return this.authService.login(user);
   }
 }

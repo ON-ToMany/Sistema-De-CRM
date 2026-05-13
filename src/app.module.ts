@@ -23,6 +23,6 @@ import { DevService } from './data/services/dev.service';
     OportunidadeModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}

@@ -25,5 +25,6 @@ import { Bcrypt } from './bcrypt/bcrypt';
     Bcrypt, 
   ],
   controllers: [AuthController],
+  exports: [Bcrypt]
 })
 export class AuthModule {}

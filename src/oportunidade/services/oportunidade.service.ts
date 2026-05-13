@@ -64,6 +64,8 @@ export class OportunidadeService {
       }
     });
 
+     console.log(JSON.stringify(oportunidade, null, 2));
+
     if (!oportunidade) {
       throw new HttpException(
         'Oportunidade não encontrada!',

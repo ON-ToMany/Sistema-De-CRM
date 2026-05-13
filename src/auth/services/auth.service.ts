@@ -26,13 +26,16 @@ export class AuthService {
   }
 
   async login(usuarioLogin: UsuarioLogin) {
-    const payload = { sub: usuarioLogin.usuario }
-
     const buscaUsuario = await this.usuarioService.findByUsuario(usuarioLogin.usuario);
 
     if (!buscaUsuario) {
       throw new HttpException('Usuário não encontrado!', HttpStatus.NOT_FOUND);
     }
+
+    const payload = { 
+      sub: buscaUsuario.id,
+      email: buscaUsuario.email
+    };
 
     return {
       id: buscaUsuario.id,

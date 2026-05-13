@@ -12,7 +12,7 @@ export class DevService implements TypeOrmOptionsFactory {
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root',
+      password: '1510',
       database: 'db_sistemacrm',
       entities: [Cliente, OportunidadeEntity, Usuario],
       synchronize: true,

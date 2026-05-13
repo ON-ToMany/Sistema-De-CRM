@@ -28,7 +28,7 @@ export class OportunidadeController {
   @Get('/todas')
   @HttpCode(HttpStatus.OK)
   buscarTodas(@Req() req: any): Promise<OportunidadeEntity[]> {
-    const usuarioId = req.user.id;
+    const usuarioId = req.user.sub;
     return this.oportunidadeService.buscarTodas(usuarioId);
   }
 
@@ -39,7 +39,7 @@ export class OportunidadeController {
     @Param('equipamento') equipamento: string,
     @Req() req: any
   ): Promise<OportunidadeEntity[]> {
-    const usuarioId = req.user.id;
+    const usuarioId = req.user.sub;
     return this.oportunidadeService.buscarPorEquipamento(equipamento, usuarioId);
   }
 
@@ -56,7 +56,7 @@ export class OportunidadeController {
   cadastrar(
     @Body() oportunidade: OportunidadeEntity, @Req() req: any
   ): Promise<OportunidadeEntity> {
-    oportunidade.usuario = req.user;
+    oportunidade.usuario = { id: req.user.sub } as any;
     return this.oportunidadeService.cadastrar(oportunidade);
   }
 

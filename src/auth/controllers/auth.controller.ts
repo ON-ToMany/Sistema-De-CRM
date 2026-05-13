@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 import { ApiTags } from '@nestjs/swagger';
 import { UsuarioLogin } from '../entities/usuarioLogin.entity';
 import { LocalAuthGuard } from '../guards/local.auth.guard';
+
 @ApiTags('Usuario')
 @Controller('/auth')
 export class AuthController {
